@@ -1,0 +1,834 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+ * Example HTML for CSS Playing Cards
+ *
+ * @author   Anika Henke <anika@selfthinker.org>
+ * @license  CC BY-SA [http://creativecommons.org/licenses/by-sa/3.0]
+ * @version  2011-06-14
+ * @link     http://selfthinker.github.com/CSS-Playing-Cards/
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>CSS Playing Cards</title>
+    <link rel="stylesheet" type="text/css" href="cards.css" media="screen" />
+    <!--[if lt IE 9]>
+        <link rel="stylesheet" type="text/css" href="cards-ie.css" media="screen" />
+    <![endif]-->
+    <!--[if IE 9]>
+        <link rel="stylesheet" type="text/css" href="cards-ie9.css" media="screen" />
+    <![endif]-->
+    <!-- the following js and css is not part of the CSS cards, but only for this example page -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+    
+    
+    
+    <script type="text/javascript" >
+    
+    var c2n = 0
+    var c2s = 0
+    
+    var fs = [1,1,1,1]
+    
+    
+    var allcards = [];
+
+	for (var i = 0; i < 52; i++)
+	 {
+   		allcards.push(i);
+	}
+	
+	function shuffleArray(array) 
+		{
+		    for (let i = array.length - 1; i > 0; i--) 
+			    {
+			        const j = Math.floor(Math.random() * (i + 1));
+			        [array[i], array[j]] = [array[j], array[i]];
+			    }
+		}
+	
+	function sleep(milliseconds) 
+	{
+	  var start = new Date().getTime();
+	  for (var i = 0; i < 1e7; i++) 
+		  {
+		    if ((new Date().getTime() - start) > milliseconds)
+			    {
+			      break;
+			    }
+		  }
+	}    
+    
+    const cardvals = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
+    const cardranks = ['a','2','3','4','5','6','7','8','9','10','j','q','k']
+    const cardsuits = ['diams','clubs','hearts','spades']
+    const cardsuitst = ['&diams;','&clubs;','&hearts;','&spades;']
+    
+    var E1 = 1;
+    var E2 = 1;
+    var E3 = 1;
+    var E4 = 1;
+    
+    function check1() 
+    {
+    
+    	 if (fs[0]==1)
+       	   {
+       	      document.getElementById("c1").click()
+       	   }
+       	          	   
+       	   if (fs[2]==1)
+       	   {
+       	      document.getElementById("c3").click()
+       	   }
+       	   
+    	E1 = (2*(c1s%2)-1)*(2*(c3s%2)-1)
+	    document.getElementById("E1_t").innerHTML = E1;
+	    
+	    showAll();    
+    }
+    
+     function check2() 
+    {
+    
+    	 if (fs[0]==1)
+       	   {
+       	      document.getElementById("c1").click()
+       	   }
+       	          	   
+       	   if (fs[3]==1)
+       	   {
+       	      document.getElementById("c4").click()
+       	   }
+       	   
+    	E2 = (2*(c1s%2)-1)*(2*(c4s%2)-1) 
+	    document.getElementById("E2_t").innerHTML = E2;
+
+	    
+	    showAll();    
+    }
+    
+     function check3() 
+    {
+    
+    	 if (fs[1]==1)
+       	   {
+       	      document.getElementById("c2").click()
+       	   }
+       	          	   
+       	   if (fs[2]==1)
+       	   {
+       	      document.getElementById("c3").click()
+       	   }
+       	   
+    	E3 = (2*(c2s%2)-1)*(2*(c3s%2)-1)
+	    document.getElementById("E3_t").innerHTML = E3;
+
+	    
+	    showAll();    
+    }
+    
+      function check4() 
+    {
+    
+    	 if (fs[1]==1)
+       	   {
+       	      document.getElementById("c2").click()
+       	   }
+       	          	   
+       	   if (fs[3]==1)
+       	   {
+       	      document.getElementById("c4").click()
+       	   }
+       	   
+    	 E4 = (2*(c2s%2)-1)*(2*(c4s%2)-1)
+	     document.getElementById("E4_t").innerHTML = E4;
+	    
+	   showAll();
+    
+    }
+    
+    function checknflip()
+    
+    {
+    
+    	if (fs[0]==0 && fs[2]==0)
+	    {
+	    	document.getElementById("E1_t").innerHTML = E1;
+	    }
+	    else
+	    {
+	    	document.getElementById("E1_t").innerHTML = "";
+	    }
+	    
+	    if (fs[0]==0 && fs[3]==0)
+	    {
+	    	document.getElementById("E2_t").innerHTML = E2;
+	    }
+	     else
+	    {
+	    	document.getElementById("E2_t").innerHTML = "";
+	    }
+
+	    
+	    if (fs[1]==0 && fs[2]==0)
+	    {
+	    	document.getElementById("E3_t").innerHTML = E3;
+	    }
+	     else
+	    {
+	    	document.getElementById("E3_t").innerHTML = "";
+	    }
+
+	    
+	    if (fs[1]==0 && fs[3]==0)
+	    {
+	    	document.getElementById("E4_t").innerHTML = E4;
+	    }
+	     else
+	    {
+	    	document.getElementById("E4_t").innerHTML = "";
+	    }
+
+
+		
+		if (fs[0]==0 && fs[1]==0 && fs[2]==0 && fs[3]==0)
+	    {
+	        document.getElementById("S_t").innerHTML = E1+E2-E3+E4;
+	    }
+	     else
+	    {
+	    	document.getElementById("S_t").innerHTML = "";
+	    }
+
+
+
+    
+    }
+
+    
+   
+	function showAll()
+	{
+		if (fs[0]==0 && fs[1]==0 && fs[2]==0 && fs[3]==0)
+	    {
+	    	document.getElementById("E1_t").innerHTML = E1;
+	    	document.getElementById("E2_t").innerHTML = E2;
+	    	document.getElementById("E3_t").innerHTML = E3;
+	    	document.getElementById("E4_t").innerHTML = E4;
+	        document.getElementById("S_t").innerHTML = E1+E2-E3+E4;
+	    }
+		
+	}
+
+
+
+
+    
+    function flipCard() 
+    {
+    	//alert('Hi')
+    	document.getElementById("forceselect").selectedIndex = 0;
+    	//alert('Ho')
+       /*if (document.getElementById("button1").checked)
+       {
+       
+       	   document.getElementById("c1").className = "card back";
+	       document.getElementById("s1a").innerHTML = "";
+	       document.getElementById("s1b").innerHTML = ""; 
+	       
+			document.getElementById("E1_t").innerHTML = "";   
+       
+	       document.getElementById("c2").className = "card back";
+	       document.getElementById("s2a").innerHTML = "";
+	       document.getElementById("s2b").innerHTML = "";
+	       
+	       document.getElementById("E2_t").innerHTML = ""; 
+	       
+       	   document.getElementById("c3").className = "card back";
+	       document.getElementById("s3a").innerHTML = "";
+	       document.getElementById("s3b").innerHTML = "";   
+	       
+	       document.getElementById("E3_t").innerHTML = ""; 
+	       
+		   document.getElementById("c4").className = "card back";
+	       document.getElementById("s4a").innerHTML = "";
+	       document.getElementById("s4b").innerHTML = "";  
+	       
+			document.getElementById("E4_t").innerHTML = "";   
+			
+			document.getElementById("S_t").innerHTML = ""; 
+       }
+       else 
+       {	*/
+       	   //c2n = Math.floor(Math.random() * 13);
+       	   //c2s = Math.floor(Math.random() * 4);
+       	   
+       	   if (fs[0]==0)
+       	   {
+       	      document.getElementById("c1").click()
+       	   }
+       	   
+       	   if (fs[1]==0)
+       	   {
+       	      document.getElementById("c2").click()
+       	   }
+       	   
+       	   if (fs[2]==0)
+       	   {
+       	      document.getElementById("c3").click()
+       	   }
+       	   
+       	   if (fs[3]==0)
+       	   {
+       	      document.getElementById("c4").click()
+       	   }
+       	   
+       	   
+		   setTimeout(function(){
+    
+
+       	   
+       	   shuffleArray(allcards)
+       	   
+       	   c1n = allcards[0]%13
+		   c1s = Math.floor(allcards[0]/13)
+
+       	   
+       	   c2n = allcards[1]%13
+		   c2s = Math.floor(allcards[1]/13)
+		   
+		   c3n = allcards[2]%13
+		   c3s = Math.floor(allcards[2]/13)
+
+       	   
+       	   c4n = allcards[3]%13
+		   c4s = Math.floor(allcards[3]/13)
+
+		   document.getElementById("c1").className = "".concat("card rank-",cardranks[c1n]," ",cardsuits[c1s]);
+	       document.getElementById("s1a").innerHTML = cardvals[c1n];
+	       document.getElementById("s1b").innerHTML = cardsuitst[c1s];
+	       
+	       E1 = (2*(c1s%2)-1)*(2*(c3s%2)-1)
+	       document.getElementById("E1_t").innerHTML = ""; 
+
+	       document.getElementById("c2").className = "".concat("card rank-",cardranks[c2n]," ",cardsuits[c2s]);
+	       document.getElementById("s2a").innerHTML = cardvals[c2n];
+	       document.getElementById("s2b").innerHTML = cardsuitst[c2s];
+	       
+	       E2 = (2*(c1s%2)-1)*(2*(c4s%2)-1) 
+	       document.getElementById("E2_t").innerHTML = "";
+	       
+	       document.getElementById("c3").className = "".concat("card rank-",cardranks[c3n]," ",cardsuits[c3s]);
+	       document.getElementById("s3a").innerHTML = cardvals[c3n];
+	       document.getElementById("s3b").innerHTML = cardsuitst[c3s];
+	       
+	       E3 = (2*(c2s%2)-1)*(2*(c3s%2)-1) 
+	       document.getElementById("E3_t").innerHTML = "";
+	       
+	       document.getElementById("c4").className = "".concat("card rank-",cardranks[c4n]," ",cardsuits[c4s]);
+	       document.getElementById("s4a").innerHTML = cardvals[c4n];
+	       document.getElementById("s4b").innerHTML = cardsuitst[c4s];
+	       
+	       E4 = (2*(c2s%2)-1)*(2*(c4s%2)-1)
+	       //alert('Hu')
+	       //alert(E4)
+	       document.getElementById("E4_t").innerHTML = "";
+	       
+	       document.getElementById("S_t").innerHTML = "";
+	       
+	       //do what you need here
+			}, 500);
+
+
+
+       /*}*/
+
+    } 
+    
+    function getCombo() 
+    {
+    
+    	   forceval = parseInt(document.getElementById("forceselect").value).toString(2).padStart(4, '0');
+    	   //alert(forceval)
+    	   //alert(forceval[0])
+
+             	   
+       	   if (fs[0]==0)
+       	   {
+       	      document.getElementById("c1").click()
+       	   }
+       	   
+       	   if (fs[1]==0)
+       	   {
+       	      document.getElementById("c2").click()
+       	   }
+       	   
+       	   if (fs[2]==0)
+       	   {
+       	      document.getElementById("c3").click()
+       	   }
+       	   
+       	   if (fs[3]==0)
+       	   {
+       	      document.getElementById("c4").click()
+       	   }
+       	   
+       	   
+       	   forcemissing=true;
+       	   
+       	   
+       	   
+       	   
+       	   while(forcemissing)
+       	   {
+       	   
+       	   //alert('shuffling!')
+       	   shuffleArray(allcards)
+       	   //alert('finishedshuffling!')
+       	  
+       	   
+       	   //shuffleArray(allcards)
+       	   
+       	   //alert('calculating')
+       	   
+       	   c1n = allcards[0]%13
+		   c1s = Math.floor(allcards[0]/13)
+		   c1vs =(c1s%2).toString(2)
+
+       	   
+       	   c2n = allcards[1]%13
+		   c2s = Math.floor(allcards[1]/13)
+		   c2vs =(c2s%2).toString(2)
+		   
+		   c3n = allcards[2]%13
+		   c3s = Math.floor(allcards[2]/13)
+		   c3vs =(c3s%2).toString(2)
+
+       	   
+       	   c4n = allcards[3]%13
+		   c4s = Math.floor(allcards[3]/13)
+		   c4vs =(c4s%2).toString(2)
+		   
+		   //alert('dondecalculating')
+		   
+		   //alert(c1vs+c2vs+c3vs+c4vs)
+		   //alert(c1vs==forceval[0]&&c2vs==forceval[1])
+		   //
+		   
+		   
+		   //c1vs==forceval[0]
+		   
+		   //&&c2vs==forceval[1]&&c3vs==forceval[2]&&c4vs==forceval[4]
+		   
+		   if(c1vs==forceval[0]&&c2vs==forceval[1]&&c3vs==forceval[2]&&c4vs==forceval[3])
+		   {
+		   	 forcemissing=false
+		   	 //alert('Found the combo!')	
+		   }
+
+       	   
+       	  }
+       	   
+		   setTimeout(function(){
+    
+
+       	   
+       	   //shuffleArray(allcards)
+       	   
+       	   c1n = allcards[0]%13
+		   c1s = Math.floor(allcards[0]/13)
+
+       	   
+       	   c2n = allcards[1]%13
+		   c2s = Math.floor(allcards[1]/13)
+		   
+		   c3n = allcards[2]%13
+		   c3s = Math.floor(allcards[2]/13)
+
+       	   
+       	   c4n = allcards[3]%13
+		   c4s = Math.floor(allcards[3]/13)
+
+		   document.getElementById("c1").className = "".concat("card rank-",cardranks[c1n]," ",cardsuits[c1s]);
+	       document.getElementById("s1a").innerHTML = cardvals[c1n];
+	       document.getElementById("s1b").innerHTML = cardsuitst[c1s];
+	       
+	       E1 = (2*(c1s%2)-1)*(2*(c3s%2)-1)
+	       document.getElementById("E1_t").innerHTML = ""; 
+
+	       document.getElementById("c2").className = "".concat("card rank-",cardranks[c2n]," ",cardsuits[c2s]);
+	       document.getElementById("s2a").innerHTML = cardvals[c2n];
+	       document.getElementById("s2b").innerHTML = cardsuitst[c2s];
+	       
+	       E2 = (2*(c1s%2)-1)*(2*(c4s%2)-1) 
+	       document.getElementById("E2_t").innerHTML = "";
+	       
+	       document.getElementById("c3").className = "".concat("card rank-",cardranks[c3n]," ",cardsuits[c3s]);
+	       document.getElementById("s3a").innerHTML = cardvals[c3n];
+	       document.getElementById("s3b").innerHTML = cardsuitst[c3s];
+	       
+	       E3 = (2*(c2s%2)-1)*(2*(c3s%2)-1) 
+	       document.getElementById("E3_t").innerHTML = "";
+	       
+	       document.getElementById("c4").className = "".concat("card rank-",cardranks[c4n]," ",cardsuits[c4s]);
+	       document.getElementById("s4a").innerHTML = cardvals[c4n];
+	       document.getElementById("s4b").innerHTML = cardsuitst[c4s];
+	       
+	       E4 = (2*(c2s%2)-1)*(2*(c4s%2)-1)
+	       //alert(E4)
+	       document.getElementById("E4_t").innerHTML = "";
+	       
+	       document.getElementById("S_t").innerHTML = "";
+	       
+	       //do what you need here
+			}, 500);
+			
+			
+			 setTimeout(function(){document.getElementById("c1").click() 
+			 
+				setTimeout(function(){document.getElementById("c2").click() 
+				
+					setTimeout(function(){document.getElementById("c3").click() 
+					
+					   setTimeout(function(){document.getElementById("c4").click() }, 1000);
+					
+					}, 1000);
+				
+				}, 1000);
+
+				 }, 1000);
+			 
+			  //
+			  //
+
+			//setTimeout(function(){
+
+			//document.getElementById("c1").click() }, 1000);
+
+
+
+
+
+       /*}*/
+
+    } 
+
+    
+    var cards = document.querySelectorAll('.cardo');
+
+	[...cards].forEach((card,i)=>{
+	  card.addEventListener( 'click', function() {
+	    card.classList.toggle('is-flipped');
+	    fs[i] = (1-fs[i])
+	    alert(fs[i])
+	  });
+	});
+
+    
+    </script>
+    
+    
+    <script type="text/javascript"><!--
+    $(document).ready(function(){
+        $('.options').addClass('active');
+        $('.toggle li').click(function(){
+            $('.playingCards').toggleClass($(this).text());
+        });
+        $('.lang li').click(function(){
+            $('html').attr('lang', $(this).text());
+            $('html').attr('xml:lang', $(this).text());
+        });
+    });
+    //--></script>
+    <style type="text/css"><!--
+        body {
+            margin: 2em 20%;
+        }
+        .options.active {
+            position: fixed;
+            top: 1em;
+            right: 1em;
+            background: #ddd;
+            padding: .5em;
+        }
+        .options.active h3 {
+            font-size: 1.2em;
+        }
+        .options.active ul {
+            padding: 0;
+        }
+        .options.active li {
+            color: #00c;
+            text-decoration: underline;
+            margin-left: 1.5em;
+            cursor: pointer;
+        }
+        .options.active li:hover {
+            text-decoration: none;
+        }
+        div.clear {
+            clear: both;
+            height: 0;
+            line-height: 0;
+            font-size: 1px;
+            visibility: hidden;
+        }
+    .auto-style1, .auto-style2, .auto-style3, .auto-style4 {
+		text-align: center;
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: 30pt;
+		display:block;
+	}
+	
+	.auto-style1:hover {
+	transition: background-color 0.5s;
+    background-color: #ffc8deff;
+    cursor: pointer;
+	}
+	
+	.auto-style2:hover {
+	transition: background-color 0.5s;
+    background-color: #ffeec7ff;
+    cursor: pointer;
+	}
+	
+	.auto-style3:hover {
+	transition: background-color 0.5s;
+    background-color: #d3f3e0ff;
+    cursor: pointer;
+	}
+	
+	.auto-style4:hover {
+	transition: background-color 0.5s;
+    background-color: #d3e0f3ff;
+    cursor: pointer;
+	}
+
+
+
+	
+	.auto-styleS {
+		text-align: center;
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: 60pt;
+	}
+
+    .auto-style5 {
+		background-color: #FFFFFF;
+	}
+	.auto-style6 {
+		background-color: #FFFFFF;
+	}
+	.auto-style7 {
+		background-color: #FFFFFF;
+	}
+
+    .auto-style8 {
+		text-align: center;
+	}
+
+    --></style>
+</head>
+<body style="margin: 10px">
+
+
+
+<table style="width: 100%">
+	<tr>
+		<td class="auto-style5">&nbsp;</td>
+		<td class="auto-style6">
+		<div class="playingCards fourColours rotateHand" style="background-image:url('s_index.svg'); background-size: 600px;  background-position: center; width:755 px;  background-repeat:no-repeat;">
+
+<!-- .card -->
+	
+			<table align="center" style="width: 100%">
+				<tr>
+					<td style="height: 64px">
+	
+	<form method="post" >
+		<div class="auto-style8">
+		<input id="button1" onclick="flipCard()" name="Checkbox2" type="button" value="Reshuffle" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<select id ="forceselect" name="Select1" style="width: 130px; height: 29px">
+		<option value="20"></option>
+		<option value="0">&#x1F534&#x1F534&#x1F534&#x1F534</option>
+		<option value="1">&#x1F534&#x1F534&#x1F534&#x26AB</option>
+		<option value="2">&#x1F534&#x1F534&#x26AB&#x1F534</option>
+		<option value="3">&#x1F534&#x1F534&#x26AB&#x26AB</option>
+		<option value="4">&#x1F534&#x26AB&#x1F534&#x1F534</option>
+		<option value="5">&#x1F534&#x26AB&#x1F534&#x26AB</option>		
+		<option value="6">&#x1F534&#x26AB&#x26AB&#x1F534</option>
+		<option value="7">&#x1F534&#x26AB&#x26AB&#x26AB</option>
+		<option value="8">&#x26AB&#x1F534&#x1F534&#x1F534</option>
+		<option value="9">&#x26AB&#x1F534&#x1F534&#x26AB</option>
+		<option value="10">&#x26AB&#x1F534&#x26AB&#x1F534</option>
+		<option value="11">&#x26AB&#x1F534&#x26AB&#x26AB</option>
+		<option value="12">&#x26AB&#x26AB&#x1F534&#x1F534</option>
+		<option value="13">&#x26AB&#x26AB&#x1F534&#x26AB</option>
+		<option value="14">&#x26AB&#x26AB&#x26AB&#x1F534</option>
+		<option value="15">&#x26AB&#x26AB&#x26AB&#x26AB</option>
+		</select> 
+		
+				<input id="button2" onclick="getCombo()" name="Checkbox1" type="button" value="Select" />
+		</div>
+		</form>
+					</td>
+				</tr>
+			</table>
+
+
+	<table align="center" style="z-index:3; height: 423px;">
+		<tr>
+			<td style="height: 289px">
+
+    		<div class="scene">
+
+    			<div class="panel" style="position:relative; left:115px; top: 10px;">
+
+    				<div class="panel-front">
+
+				    <a id ="c1_b" class="card back">
+				          <span id="s1a_b" class="rank"></span>
+				           <span id ="s1b_b"class="suit"></span></a>
+
+    				</div>
+    				
+    				<div class="panel-back">
+
+				    <a id ="c1" class="card rank-4 diams">
+			          <span id="s1a" class="rank">4</span>
+			           <span id ="s1b"class="suit">&diams;</span> </a>
+
+    				</div>
+
+
+    			</div>
+
+    		</div>
+
+    		</td>
+			<td style="height: 289px">
+
+     <div class="scene">
+
+    			<div class="panel" style="position:relative; left:60px; top: 10px;">
+
+    				<div class="panel-front">
+
+				    <a id ="c2_b" class="card back">
+				          <span id="s2a_b" class="rank"></span>
+				           <span id ="s2b_b"class="suit"></span></a>
+
+    				</div>
+    				
+    				<div class="panel-back">
+
+				    <a id ="c2" class="card rank-4 diams">
+			          <span id="s2a" class="rank">4</span>
+			           <span id ="s2b"class="suit">&diams;</span> </a>
+
+    				</div>
+
+
+    			</div>
+
+    		</div>
+
+    
+    		</td>
+			<td style="height: 289px">
+
+     <div class="scene">
+
+    			<div class="panel" style="position:relative; left:5px; top: 10px;">
+
+    				<div class="panel-front">
+
+				    <a id ="c3_b" class="card back">
+				          <span id="s3a_b" class="rank"></span>
+				           <span id ="s3b_b"class="suit"></span></a>
+
+    				</div>
+    				
+    				<div class="panel-back">
+
+				    <a id ="c3" class="card rank-4 diams">
+			          <span id="s3a" class="rank">4</span>
+			           <span id ="s3b"class="suit">&diams;</span> </a>
+
+    				</div>
+
+
+    			</div>
+
+    		</div>
+
+    
+    		</td>
+			<td style="height: 289px">
+
+    <div class="scene">
+
+    			<div class="panel" style="position:relative; left:-55px; top: 10px;">
+
+    				<div class="panel-front">
+
+				    <a id ="c4_b" class="card back">
+				          <span id="s4a_b" class="rank"></span>
+				           <span id ="s4b_b"class="suit"></span></a>
+
+    				</div>
+    				
+    				<div class="panel-back">
+
+				    <a id ="c4" class="card rank-4 diams">
+			          <span id="s4a" class="rank">4</span>
+			           <span id ="s4b"class="suit">&diams;</span> </a>
+
+    				</div>
+
+
+    			</div>
+
+    		</div>
+
+    
+    		</td>
+		</tr>
+		<tr>
+			<td >
+
+    		<div id="E1_t" class="auto-style1" onclick="check1()" style="width: 37px; height: 37px; position:relative; left: 218px; top: -35px; z-index:2">
+				</div></td>
+			<td style="height: 118px">
+
+
+     	    <div id="E2_t" class="auto-style2" onclick="check2()" style="width: 37px; height: 37px; position:relative; left: 111px; top: -35px; z-index:2">
+				</div></td>
+			<td style="height: 118px">
+
+     	    <div id="E3_t" class="auto-style3" onclick="check3()" style="width: 37px; height: 37px; position:relative; left: -5px; top: -35px; z-index:2">
+				</div></td>
+			<td style="height: 118px">
+			<div id="E4_t" class="auto-style4" onclick="check4()" style="width: 37px; height: 37px; position:relative; left: -91px; top: 12px; z-index:2">
+				</div>
+    		<div id="S_t"class="auto-styleS" style="width: 93px; height: 91px; position:relative;  z-index:2; top: -55px; left: -13px;">
+				</div></td>
+		</tr>
+		</table>
+    
+</div>
+
+		
+		</td>
+		<td class="auto-style7">&nbsp;</td>
+	</tr>
+</table>
+
+
+
+
+<script src="./cards_js.js"></script>
+</body>
+</html>
