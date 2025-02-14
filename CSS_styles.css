@@ -1,0 +1,11 @@
+﻿.ImageBorder {
+	text-align: right;
+	cursor: pointer;
+}
+
+
+.parent {
+}
+.child {
+  display: inline-block;
+}

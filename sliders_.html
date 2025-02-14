@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Round Range Sliders</title>
+  <link rel="stylesheet" href="sliders_CSS.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<header>
+  These range-sliders use <em>CSS Custom Properties</em>, and use the same styles and JavaScript as my <a href="https://codepen.io/stoumann/pen/oNzgWMo">regular range sliders</a>. Arrow-keys can be used as well.
+</header>
+<main>
+<!-- data-range="circular" -->
+<input type="range" class="c-rng" min="0" max="360" step="1" value="75"  />
+
+<input id="slider_1" type="range" class="c-rng" min="0" max="360" step="1" value="90" data-range="circular" data-modifier="c-rng--tomato" />
+
+<input type="range" class="c-rng" min="0" max="360" step="22.5" value="50" data-range="circular" data-modifier="c-rng--darkcyan" />
+</main>
+<!-- partial -->
+  <script  src="sliders_js.js"></script>
+
+<form method="post">
+	<input name="Button1" type="button" value="Get value" onclick="checkSlider()"><input name="Button2" type="button" value="Get phase" onclick="checkSliderPhase()"><input name="Button3" type="button" value="Get string" onclick="checkString()"></form>
+
+</body>
+</html>

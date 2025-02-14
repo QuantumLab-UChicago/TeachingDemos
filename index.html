@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!--
+  Copyright 2019 the original author or authors.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
+  TODO:
+    [] Verify whether phase calculations are always correct when state is |1>
+    [] Provide parameterized rotation gates.
+    [] Fix picking issue on back side of sphere
+    [] Document classes and clean up code
+    [] Follow up on Jay's suggestion regarding y button: |+i> and |-i>
+    [] Use min version of babylon.js
+    [] Fix meta element so image will load into GitBook links
+    [] Improve formatting of Pi rotations by justifying text instead of using spaces
+    [] Consider providing capability of sliding "outcome probability" bar to manipulate Bloch sphere state
+    [] Consider labeling the Ry gates |+i> and |-i>
+-->
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+    <!--meta property="twitter:image" content="https://javafxpert.github.io/grok-bloch/images/bloch-sphere.png"-->
+    <title>v0.12 Grokking the Bloch Sphere</title>
+    <!--- Link to the last version of BabylonJS --->
+    <!-- script src="https://cdn.babylonjs.com/babylon.js"></script -->
+    <script src="js/thirdparty/babylon.js"></script>
+    <script src="js/thirdparty/babylon.gui.min.js"></script>
+    <script src="js/thirdparty/math.min.js"></script>
+    <script src="js/blochsphere.js"></script>
+    <script src="js/quantumphasedisk.js"></script>
+    <script src="js/gate.js"></script>
+    <script src="js/scene.js"></script>
+     <script src="js/custom.js"></script>
+
+    <style>
+        html,
+        body {
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
+        #renderCanvas {
+            width: 100%;
+            height: 100%;
+            touch-action: none;
+            border-style: solid;
+			border-width: 10px;
+			border-color:red
+        }
+        </style>
+	<link href="CSS_styles.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <span class="auto-style1">
+    <div style="width: 100%; height:90% " class="parent">
+	    <div style="width: 50%; height: 90%" class="child">
+	    <canvas id="renderCanvas" width="90%"></canvas></div>
+				<div style="width: 18%; " class="child">
+	    			<table align="right">
+				<tr>
+					<td>
+    				<img id ="Button0" alt="" height="100" src="textures/one-state.png" class="ImageBorder" onclick="picture0()"></td>
+				</tr>
+				<tr>
+					<td> 
+				<img alt="" height="100" src="textures/one-state.png" class="ImageBorder" onclick="picture1()" ></td>
+				</tr>
+				<tr>
+					<td> 
+				<img alt="" height="100" src="textures/rx+gate.png" class="ImageBorder" onclick="pictureRx()" ></td>
+				</tr>
+				<tr>
+					<td> 
+				<img alt="" height="100" src="textures/h-gate.png" class="ImageBorder" onclick="pictureR_HWP()" ></td>
+				</tr>
+
+				<tr>
+					<td> 
+					<div id="Amp0">a</div>
+					<div id="Amp1">a</div>
+				</td>
+				</tr>
+
+
+			</table>
+	    </div>
+
+	</div>
+	</span>&nbsp;<script src="js/main.js"></script>
+</body>
+
+</html>
